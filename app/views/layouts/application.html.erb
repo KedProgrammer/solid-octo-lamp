@@ -6,6 +6,7 @@
     <%= action_cable_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
   </head>
 
@@ -26,6 +27,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="<%= 'active' if @tab == :dashboard %>"><%= link_to "Dashboard", root_path %></li>
+            <li class="<%= 'active' if @tab == :expenses %>"><%= link_to "Expenses", expenses_path %></li>
           </ul>
         </div>
       </div>

@@ -1,0 +1,69 @@
+.filter-header {
+  color: #808487;
+
+  span {
+    display: block;
+    color: #808487;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+}
+
+.filter-type a {
+  display: block;
+  padding: 7px 15px;
+}
+
+a.list-group-item { color: #808487; }
+
+.summary-box {
+  padding: 10px;
+
+  .summary-value {
+    font-size: 24px;
+  }
+
+  .summary-label { color: #666; }
+}
+
+#transactions {
+  .date {
+    width: 50px;
+    text-align: center;
+
+    .day {
+      font-size: 21px;
+      line-height: 1.1em;
+    }
+    .month { font-size: 13px; }
+  }
+  .excluded { margin-left: 5px; }
+  .concept {
+    color: #ccd1d4;
+    font-size: 14px;
+  }
+  .category {
+    width: 150px;
+  }
+  .amount {
+    font-size: 16px;
+  }
+  .actions {
+    span {
+      visibility: hidden;
+      color: #999;
+      font-size: 13px;
+      cursor: pointer;
+      margin-left: 10px;
+
+      i {
+        font-size: 18px;
+        color: #666;
+        padding-top: 4px;
+        vertical-align: sub;
+      }
+    }
+  }
+
+  tr:hover .actions span { visibility: visible; }
+}

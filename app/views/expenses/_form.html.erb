@@ -1,0 +1,53 @@
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @expense, remote: true do |f| %>
+        <div class="modal-header">
+          <button class="close cancel" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Expense</h4>
+        </div>
+        <div class="modal-body">
+            <!-- type and executed_at -->
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <%= f.label :type %>
+                  <%= f.select :type, Expense.types.keys.map(&:capitalize), {}, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <%= f.label :date %>
+                  <%= f.text_field :date, class: "form-control text-right" %>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :concept %>
+              <%= f.text_field :concept, class: "form-control" %>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <%= f.label :category %>
+                  <%= f.collection_select :category_id, Category.all, :id, :name, {}, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <%= f.label :amount %>
+                  <%= f.number_field :amount, class: "form-control text-right" %>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

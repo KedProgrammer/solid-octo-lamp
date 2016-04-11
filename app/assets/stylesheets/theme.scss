@@ -1,25 +1,64 @@
-$gray-darker:           #33373a;
-$gray:                  #3D4245;
-$gray-light:            #99a0a2;
+$gray-darker:                      #33373a;
+$gray-dark:                        #2F3336;
+$gray:                             #3D4245;
+$gray-light:                       #99a0a2;
 
-$brand-primary:         $gray;
-$btn-primary-color:     #ccc;
+$brand-success:                    $gray;
+$brand-secondary:                  $gray;
+$brand-primary:                    rgb(36, 149, 227);
 
-$body-bg:               $gray-darker;
-$text-color:            $gray-light;
+$body-bg:                          $gray-darker;
+$text-color:                       $gray-light;
 
-$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-size-base:          16px;
+$btn-primary-color:                #fff;
 
-$input-bg:              $gray;
-$input-color:           $gray-light;
-$input-border:          $gray;
+$btn-default-color:                $text-color;
+$btn-default-bg:                   $gray;
+$btn-default-border:               $btn-default-bg;
 
-$table-border-color:    $gray;
+$link-color:                       $brand-primary;
+$link-hover-color:                 lighten($link-color, 10%);
+$link-hover-decoration:            none;
 
-$navbar-height:                            60px;
-$navbar-inverse-color:                     #c2c6c9;
-$navbar-inverse-bg:                        $brand-primary;
+$font-family-sans-serif:           "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-size-base:                   16px;
 
-$navbar-inverse-link-active-color:         #ccc;
-$navbar-inverse-link-active-bg:            $body-bg;
+$input-bg:                         $gray;
+$input-color:                      $gray-light;
+$input-border:                     $gray;
+
+$table-border-color:               $gray;
+$table-bg-hover:                   $gray-dark;
+
+$padding-base-vertical:            10px;
+$padding-base-horizontal:          15px;
+
+$padding-large-vertical:           18px;
+$padding-large-horizontal:         27px;
+
+$navbar-height:                    60px;
+$navbar-inverse-color:             #c2c6c9;
+$navbar-inverse-bg:                $brand-secondary;
+
+$navbar-inverse-link-active-color: #ccc;
+$navbar-inverse-link-active-bg:    $body-bg;
+
+$list-group-bg:                    $gray-darker;
+$list-group-border:                $gray;
+$list-group-hover-bg:              $gray-dark;
+
+$list-group-link-hover-color:      $text-color;
+
+$modal-inner-padding:              20px;
+
+$modal-backdrop-bg:                #333;
+$modal-backdrop-opacity:           .7;
+
+$modal-content-border-color:       rgba(0,0,0,.2);
+$modal-content-bg:                 $gray-dark;
+
+$modal-header-border-color:        $gray;
+$modal-footer-border-color:        $modal-header-border-color;
+
+$close-color:                      #000;
+$close-text-shadow:                none;
