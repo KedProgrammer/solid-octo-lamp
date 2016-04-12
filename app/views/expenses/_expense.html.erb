@@ -14,6 +14,8 @@
   <td class="category text-right"><%= expense.category.name %></td>
   <td class="text-right" style="width: 170px;">
     <div class="amount"><%= number_to_currency(expense.amount) %></div>
-    <div class="actions"><span class="edit"><i class="icon-edit"></i> Editar</span> <span class="delete"><i class="icon-trash"></i> Eliminar</span></div>
+    <div class="actions">
+      <%= link_to '<span class="glyphicon glyphicon-edit"></span> Editar'.html_safe, edit_expense_path(expense), remote: true, class: "edit" %>
+      <%= link_to '<span class="glyphicon glyphicon-trash"></span> Eliminar'.html_safe, expense, remote: true, method: :delete, class: "delete", data: { confirm: "Are you sure?" } %>
   </td>
 </tr>

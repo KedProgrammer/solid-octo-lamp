@@ -13,6 +13,11 @@ class ExpensesController < ApplicationController
     populate_index_data if @expense.valid?
   end
 
+  def destroy
+    @expense = Expense.destroy(params[:id])
+    populate_index_data
+  end
+
   private
     def populate_index_data
       @month = Date.new(year, month, 1)

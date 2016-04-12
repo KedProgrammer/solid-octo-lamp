@@ -1,0 +1,2 @@
+$('body').append('<%= j render "shared/alert", message: "The #{@expense.type} <strong>#{@expense.concept}</strong> for <strong>#{number_to_currency(@expense.amount)}</strong> on <strong>#{l @expense.date, format: "%B %d"}</strong> was destroyed successfully!" %>');
+$('.index-data').html('<%= j render "index_data" %>');
