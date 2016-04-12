@@ -7,6 +7,10 @@ class Expense < ApplicationRecord
 
   scope :between, lambda { |range| where(date: range) }
 
+  validates :type, presence: true
+  validates :concept, presence: true
+  validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
   after_initialize :default_values
 
   private
