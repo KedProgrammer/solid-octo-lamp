@@ -1,0 +1,13 @@
+<% if @expense.valid? %>
+  $('.expense-modal').modal('hide');
+  $('body').append('<%= j render "shared/alert", message: "The #{@expense.type} <strong>#{@expense.concept}</strong> for <strong>#{number_to_currency(@expense.amount)}</strong> on <strong>#{l @expense.date, format: "%B %d"}</strong> was created successfully! #{link_to "Undo", @expense, remote: true, method: :delete}" %>')
+  $('.index-data').html('<%= j render "index_data" %>')
+<% else %>
+  $('.help-error').remove();
+  $('.form-group').removeClass('has-error');
+
+  <% @expense.errors.each do |field, messages| %>
+    $('#expense_<%= field %>').parent().addClass('has-error')
+      .append('<span class="help-block help-error"><%= messages %></span>');
+  <% end %>
+<% end %>

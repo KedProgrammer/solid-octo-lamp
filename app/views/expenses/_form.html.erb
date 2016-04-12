@@ -1,4 +1,4 @@
-<div class="modal fade">
+<div class="modal expense-modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <%= form_for @expense, remote: true do |f| %>
@@ -12,7 +12,7 @@
               <div class="col-xs-6">
                 <div class="form-group">
                   <%= f.label :type %>
-                  <%= f.select :type, Expense.types.keys.map(&:capitalize), {}, class: "form-control" %>
+                  <%= f.select :type, Expense.types.keys.map { |w| [w.humanize, w] }, {}, class: "form-control" %>
                 </div>
               </div>
               <div class="col-xs-6">
@@ -24,7 +24,7 @@
             </div>
 
             <div class="form-group">
-              <%= f.label :concept %>
+              <%= f.label :concept, class: "control-label" %>
               <%= f.text_field :concept, class: "form-control" %>
             </div>
 
@@ -37,7 +37,7 @@
               </div>
               <div class="col-xs-6">
                 <div class="form-group">
-                  <%= f.label :amount %>
+                  <%= f.label :amount, class: "control-label" %>
                   <%= f.number_field :amount, class: "form-control text-right" %>
                 </div>
               </div>

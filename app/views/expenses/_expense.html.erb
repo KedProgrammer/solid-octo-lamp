@@ -1,0 +1,19 @@
+<tr>
+  <td class="date">
+    <div class="day"><%= expense.date.day %></div>
+    <div class="month"><%= l(expense.date, format: '%b') %></div>
+  </td>
+  <td>
+    <div>
+      <span class="type"><%= expense.type.capitalize %></span>
+    </div>
+    <div>
+      <span class="concept"><%= expense.concept %></span>
+    </div>
+  </td>
+  <td class="category text-right"><%= expense.category.name %></td>
+  <td class="text-right" style="width: 170px;">
+    <div class="amount"><%= number_to_currency(expense.amount) %></div>
+    <div class="actions"><span class="edit"><i class="icon-edit"></i> Editar</span> <span class="delete"><i class="icon-trash"></i> Eliminar</span></div>
+  </td>
+</tr>

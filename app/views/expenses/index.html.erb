@@ -15,71 +15,8 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-9">
-      <div class="row" style="margin-top: 10px;">
-        <div class="summary-box col-md-4 text-center">
-          <div class="summary-value"><%= @total ? number_to_currency(@total, precision: 2) : "0" %></div>
-          <div class="summary-label">Total</div>
-        </diV>
-        <div class="summary-box col-md-4 text-center">
-          <div class="summary-value"><%= @expenses.length %></div>
-          <div class="summary-label">Transacciones</div>
-        </div>
-        <div class="summary-box col-md-4 text-center">
-          <div class="summary-value"><%= @expenses.length > 0 ? number_to_currency(@total / @expenses.length, precision: 2) : "0" %></div>
-          <div class="summary-label">Promedio</div>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 20px;">
-        <div class="col-md-12">
-          <%= link_to '<span class="glyphicon glyphicon-plus"></span> New Expense'.html_safe, new_expense_path, remote: true, class: "btn btn-success pull-left" %>
-          <h4 class="dropdown pull-right">
-            <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown"><%=l @month, format: '%B %Y'%> <span class="caret"></span></button>
-            <ul class="dropdown-menu" role="menu">
-              <% (0..12).each do |i|
-                  date = i.months.ago
-              %>
-              <li role="presentation"><%= link_to l(date, format: '%B %Y'), expenses_path(params.to_unsafe_h.merge(year: l(date, format: '%Y'), month: l(date, format: '%m'))) %></li>
-              <% end %>
-            </ul>
-          </h4>
-        </div>
-      </div>
-
-      <table id="transactions" class="table table-hover" style="margin-top: 20px;">
-        <thead>
-          <tr>
-            <th class="text-center">Día</th>
-            <th>Concepto</th>
-            <th class="text-right">Categoría</th>
-            <th class="text-right">Valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @expenses.each do |expense| %>
-            <tr>
-              <td class="date">
-                <div class="day"><%= expense.date.day %></div>
-                <div class="month"><%= l(expense.date, format: '%b') %></div>
-              </td>
-              <td>
-                <div>
-                  <span class="type"><%= expense.type.capitalize %></span>
-                </div>
-                <div>
-                  <span class="concept"><%= expense.concept %></span>
-                </div>
-              </td>
-              <td class="category text-right"><%= expense.category.name %></td>
-              <td class="text-right" style="width: 170px;">
-                <div class="amount"><%= number_to_currency(expense.amount) %></div>
-                <div class="actions"><span class="edit"><i class="icon-edit"></i> Editar</span> <span class="delete"><i class="icon-trash"></i> Eliminar</span></div>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="col-md-9 index-data">
+      <%= render 'index_data' %>
     </div>
   </div>
 </div>
