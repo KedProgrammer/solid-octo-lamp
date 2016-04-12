@@ -22,7 +22,7 @@
         <% (0..12).each do |i|
             date = i.months.ago
         %>
-        <li role="presentation"><%= link_to l(date, format: '%B %Y'), expenses_path(params.to_unsafe_h.merge(year: l(date, format: '%Y'), month: l(date, format: '%m'))) %></li>
+        <li role="presentation"><%= link_to l(date, format: '%B %Y'), expenses_path(request.query_parameters.merge(year: l(date, format: '%Y'), month: l(date, format: '%m'))) %></li>
         <% end %>
       </ul>
     </h4>

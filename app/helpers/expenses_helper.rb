@@ -1,13 +1,13 @@
 module ExpensesHelper
   def link_to_type(type)
-    path = expenses_path(params.to_unsafe_h.merge(type: type))
-    path = expenses_path(params.to_unsafe_h.except(:type)) if is_type_active(type)
+    path = expenses_path(request.query_parameters.merge(type: type))
+    path = expenses_path(request.query_parameters.except(:type)) if is_type_active(type)
     link_to type_as_str(type), path, class: "list-group-item #{'active' if is_type_active(type) }"
   end
 
   def link_to_category(category)
-    path = expenses_path(params.to_unsafe_h.merge(category: category.id))
-    path = expenses_path(params.to_unsafe_h.except(:category)) if is_category_active(category)
+    path = expenses_path(request.query_parameters.merge(category: category.id))
+    path = expenses_path(request.query_parameters.except(:category)) if is_category_active(category)
     link_to category.name, path, class: "list-group-item #{'active' if is_category_active(category) }"
   end
 
