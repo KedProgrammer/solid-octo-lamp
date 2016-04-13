@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 hamburger:
-  type: 1
+  type: 0
   concept: Deli Hamburguer
-  date: 2016-04-11
-  amount: 9.99
+  date: <%= Date.current %>
+  amount: 10
   category: restaurants
 
 gasoline:
-  type: 1
+  type: 0
   concept: Gasoline
-  date: 2016-04-11
-  amount: 9.99
+  date: <%= Date.current %>
+  amount: 10
   category: car

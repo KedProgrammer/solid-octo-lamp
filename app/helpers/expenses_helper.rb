@@ -6,8 +6,8 @@ module ExpensesHelper
   end
 
   def link_to_category(category)
-    path = expenses_path(request.query_parameters.merge(category: category.id))
-    path = expenses_path(request.query_parameters.except(:category)) if is_category_active(category)
+    path = expenses_path(request.query_parameters.merge(category_id: category.id))
+    path = expenses_path(request.query_parameters.except(:category_id)) if is_category_active(category)
     link_to category.name, path, class: "list-group-item #{'active' if is_category_active(category) }"
   end
 
@@ -24,6 +24,6 @@ module ExpensesHelper
     end
 
     def is_category_active(category)
-      params[:category] == category.id.to_s
+      params[:category_id] == category.id.to_s
     end
 end

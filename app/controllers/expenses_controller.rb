@@ -34,7 +34,7 @@ class ExpensesController < ApplicationController
       @month = Date.new(year(params), month(params), 1)
       @expenses = Expense.between(@month..@month.end_of_month).order("date DESC")
       @expenses = @expenses.where(type: params[:type]) if params[:type]
-      @expenses = @expenses.where(category_id: params[:category]) if params[:category]
+      @expenses = @expenses.where(category_id: params[:category_id]) if params[:category_id]
 
       @total = @expenses.map(&:amount).reduce(&:+)
     end
@@ -52,6 +52,10 @@ class ExpensesController < ApplicationController
     end
 
     def filters_from_cookie
-      JSON.parse(cookies[:expenses_filter], symbolize_names: true)
+      if cookies[:expenses_filter]
+        JSON.parse(cookies[:expenses_filter], symbolize_names: true)
+      else
+        {}
+      end
     end
 end
