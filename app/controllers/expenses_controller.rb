@@ -11,17 +11,26 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.create(expenses_params)
-    populate_index_data(JSON.parse(cookies[:expenses_filter], symbolize_names: true)) if @expense.valid?
+    populate_index_data(filters_from_cookie) if @expense.valid?
+  end
+
+  def edit
+    @expense = Expense.find(params[:id])
+  end
+
+  def update
+    @expense = Expense.find(params[:id])
+    @expense.update(expenses_params)
+    populate_index_data(filters_from_cookie) if @expense.valid?
   end
 
   def destroy
     @expense = Expense.destroy(params[:id])
-    populate_index_data(JSON.parse(cookies[:expenses_filter], symbolize_names: true))
+    populate_index_data(filters_from_cookie)
   end
 
   private
     def populate_index_data(params)
-      puts "Populate index data: #{params}"
       @month = Date.new(year(params), month(params), 1)
       @expenses = Expense.between(@month..@month.end_of_month).order("date DESC")
       @expenses = @expenses.where(type: params[:type]) if params[:type]
@@ -40,5 +49,9 @@ class ExpensesController < ApplicationController
 
     def expenses_params
       params.require(:expense).permit(:type, :date, :concept, :category_id, :amount)
+    end
+
+    def filters_from_cookie
+      JSON.parse(cookies[:expenses_filter], symbolize_names: true)
     end
 end
