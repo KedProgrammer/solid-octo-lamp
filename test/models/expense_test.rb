@@ -50,4 +50,59 @@ class ExpenseTest < ActiveSupport::TestCase
 
     assert_not expense.save
   end
+
+  test "spent_by_month_and_type should return the correct values" do
+    expected = [{
+      date: 1.month.ago.beginning_of_month.to_date,
+      "purchase" => 0,
+      "withdrawal" => 0,
+      "transfer" => 0,
+      "payment" => 0
+    }, {
+      date: Date.current.beginning_of_month,
+      "purchase" => 20,
+      "withdrawal" => 0,
+      "transfer" => 0,
+      "payment" => 0
+    }]
+
+    range = 1.month.ago.beginning_of_month.to_date..Date.current
+    assert_equal expected, Expense.spent_by_month_and_type(range)
+  end
+
+  test "spent_by_day_and_type should return the correct values" do
+    expected = [{
+      date: 1.day.ago.to_date,
+      "purchase" => 0,
+      "withdrawal" => 0,
+      "transfer" => 0,
+      "payment" => 0
+    }, {
+      date: Date.current,
+      "purchase" => Expense.all.map(&:amount).reduce(&:+),
+      "withdrawal" => 0,
+      "transfer" => 0,
+      "payment" => 0
+    }]
+
+    range = 1.day.ago.to_date..Date.current
+    assert_equal expected, Expense.spent_by_day_and_type(range)
+  end
+
+  test "spent_by_category should return the correct values" do
+    expected = {}
+    expected[categories(:restaurants).id] = 10
+    expected[categories(:car).id] = 10
+
+    range = Date.current.beginning_of_month..Date.current
+    assert_equal expected, Expense.spent_by_category(range)
+  end
+
+  test "accumulated_by_day should return the the correct values" do
+    range = Date.current.beginning_of_month..Date.current
+    expected = range.map { |date| { date: date, amount: 0 } }
+    expected[-1] = { date: Date.current, amount: 20 }
+
+    assert_equal expected, Expense.accumulated_by_day(range)
+  end
 end
