@@ -1,3 +1,12 @@
-// Place all the styles related to the dashboard controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.total-box {
+  text-align: center;
+  font-size: 24px;
+
+  span {
+    display: block;
+    color: #bbb;
+    font-size: 12px;
+  }
+}
+
+.panel-heading { padding: 15px 20px; }

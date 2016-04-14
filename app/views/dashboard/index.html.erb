@@ -1,2 +1,184 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="total-box col-md-3">
+      <%= number_to_currency(spent_between(today_range), precision: 2) %>
+      <span>HOY</span>
+    </div>
+    <div class="total-box col-md-3">
+      <%= number_to_currency(spent_between(yesterday_range), precision: 2) %>
+      <span>AYER</span>
+    </div>
+    <div class="total-box col-md-3">
+      <%= number_to_currency(spent_between(current_month_range), precision: 2) %>
+      <span>ESTE MES</span>
+    </div>
+    <div class="total-box col-md-3">
+      <%= number_to_currency(spent_between(past_month_range), precision: 2) %>
+      <span>MES PASADO</span>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 40px;">
+    <div class="box col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Últimos 6 Meses</div>
+        <div class="panel-body">
+          <div id="expenses-chart" style="height: 250px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="box col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Por Día</div>
+        <div class="panel-body">
+          <div id="daily-expenses-chart" style="height: 250px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px;">
+    <div class="box col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Por Categoría</div>
+        <div class="panel-body">
+          <div id="category-chart" style="height: 250px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class=" box col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Acumulado</div>
+        <div class="panel-body">
+          <div id="month-acc" style="height: 250px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var generate = function(data, type) {
+    return data.map(function(point) {
+      return { y: parseFloat(point[type]), label: point['date'] };
+    });
+  };
+
+  var expensesChart = function(target, data) {
+    new CanvasJS.Chart(target,
+      {
+        creditText: "",
+        toolTip: {
+          shared: "true"
+        },
+        backgroundColor: 'transparent',
+        legend: {
+          fontSize: 13,
+          fontFamily: "Helvetica Neue",
+          fontColor: "#666"
+        },
+        axisX: {
+          lineThickness: 0
+        },
+        axisY: {
+          gridThickness: 1,
+          gridColor: '#666',
+          tickColor: '#666',
+          tickThickness: 1,
+          lineThickness: 0
+        },
+        data: [
+          {
+            type: "stackedColumn",
+            showInLegend: true,
+            name: 'Purchases',
+            dataPoints: generate(data, 'purchase')
+          },
+          {
+            type: "stackedColumn",
+            showInLegend: true,
+            name: "Withdrawals",
+            dataPoints: generate(data, 'withdrawal')
+          },
+          {
+            type: "stackedColumn",
+            showInLegend: true,
+            name: "Transfers",
+            dataPoints: generate(data, 'transfer')
+          },
+          {
+            type: "stackedColumn",
+            showInLegend: true,
+            name: "Payments",
+            dataPoints: generate(data, 'payment')
+          }
+        ]
+      }
+    ).render();
+  };
+
+  var data = <%= format_month(spent_by_month_and_type(last_six_months_range)) %>;
+  expensesChart("expenses-chart", data);
+
+  data = <%= format_day(spent_by_day_and_type(per_day_range)) %>;
+  expensesChart("daily-expenses-chart", data);
+
+  data = <%= spent_by_category(current_month_range).to_json.html_safe %>
+  new CanvasJS.Chart("category-chart",
+    {
+      creditText: "",
+      backgroundColor: 'transparent',
+      data: [
+        {
+          type: "doughnut",
+          dataPoints: data,
+          lineThickness: 5
+        }
+      ]
+    }
+  ).render();
+
+  data = <%= format_day(accumulated_by_day(accumulated_range)) %>;
+  data2 = <%= format_day(accumulated_by_day(past_accumulated_range)) %>;
+  new CanvasJS.Chart("month-acc",
+    {
+      creditText: "",
+      legend: {
+        fontSize: 13,
+        fontFamily: "Helvetica Neue",
+        fontColor: "#666"
+      },
+      backgroundColor: 'transparent',
+      axisX: {
+        lineThickness: 0
+      },
+      axisY: {
+        gridThickness: 1,
+        gridColor: '#666',
+        tickColor: '#666',
+        tickThickness: 1,
+        lineThickness: 0
+      },
+      data: [
+        {
+          type: "area",
+          showInLegend: true,
+          name: "Mes Anterior",
+          color: "rgba(194,70,66,.6)",
+          dataPoints: data2.map(function(point) {
+            return { y: parseFloat(point['amount']), label: point['date'] };
+          })
+        },
+        {
+          type: "area",
+          showInLegend: true,
+          name: "Mes Seleccionado",
+          color: "rgba(0,135,147,.8)",
+          dataPoints: data.map(function(point) {
+            return { y: parseFloat(point['amount']), label: point['date'] };
+          })
+        }
+      ]
+    }
+  ).render();
+</script>
