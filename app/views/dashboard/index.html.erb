@@ -2,26 +2,26 @@
   <div class="row">
     <div class="total-box col-md-3">
       <%= number_to_currency(spent_between(today_range), precision: 2) %>
-      <span>HOY</span>
+      <span>TODAY</span>
     </div>
     <div class="total-box col-md-3">
       <%= number_to_currency(spent_between(yesterday_range), precision: 2) %>
-      <span>AYER</span>
+      <span>YESTERDAY</span>
     </div>
     <div class="total-box col-md-3">
       <%= number_to_currency(spent_between(current_month_range), precision: 2) %>
-      <span>ESTE MES</span>
+      <span>THIS MONTH</span>
     </div>
     <div class="total-box col-md-3">
       <%= number_to_currency(spent_between(past_month_range), precision: 2) %>
-      <span>MES PASADO</span>
+      <span>LAST MONTH</span>
     </div>
   </div>
 
   <div class="row" style="margin-top: 40px;">
     <div class="box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Últimos 6 Meses</div>
+        <div class="panel-heading">Last 6 months</div>
         <div class="panel-body">
           <div id="expenses-chart" style="height: 250px;"></div>
         </div>
@@ -29,7 +29,7 @@
     </div>
     <div class="box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Por Día</div>
+        <div class="panel-heading">By day</div>
         <div class="panel-body">
           <div id="daily-expenses-chart" style="height: 250px;"></div>
         </div>
@@ -40,7 +40,7 @@
   <div class="row" style="margin-top: 10px;">
     <div class="box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Por Categoría</div>
+        <div class="panel-heading">By Category</div>
         <div class="panel-body">
           <div id="category-chart" style="height: 250px;"></div>
         </div>
@@ -48,7 +48,7 @@
     </div>
     <div class=" box col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Acumulado</div>
+        <div class="panel-heading">Accumulated</div>
         <div class="panel-body">
           <div id="month-acc" style="height: 250px;"></div>
         </div>

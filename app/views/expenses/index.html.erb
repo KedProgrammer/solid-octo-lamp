@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <h4 class="filter-header">Tipo de Transacción <span>Selecciona para filtrar</span></h4>
+      <h4 class="filter-header">Transaction type <span>Select to filter</span></h4>
       <div class="list-group filter-type">
         <% Expense.types.keys.each do |type| %>
           <%= link_to_type(type) %>
         <% end %>
       </div>
 
-      <h4 class="filter-header">Categoría <span>Selecciona para filtrar</span></h4>
+      <h4 class="filter-header">Category <span>Select to filter</span></h4>
       <div class="list-group filter-type">
         <% Category.all.each do |category| %>
           <%= link_to_category(category) %>

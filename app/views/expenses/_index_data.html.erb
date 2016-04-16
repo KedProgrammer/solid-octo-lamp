@@ -5,11 +5,11 @@
   </diV>
   <div class="summary-box col-md-4 text-center">
     <div class="summary-value"><%= @expenses.length %></div>
-    <div class="summary-label">Transacciones</div>
+    <div class="summary-label">Transactions</div>
   </div>
   <div class="summary-box col-md-4 text-center">
     <div class="summary-value"><%= @expenses.length > 0 ? number_to_currency(@total / @expenses.length, precision: 2) : "0" %></div>
-    <div class="summary-label">Promedio</div>
+    <div class="summary-label">Average</div>
   </div>
 </div>
 
